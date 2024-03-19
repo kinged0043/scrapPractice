@@ -9,4 +9,9 @@ import scrapy
 class HummusItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    # rank = scrapy.Field()
+    # score = scrapy.Field()
+    # genre = scrapy.Field()
+    # plot = scrapy.Field()
+
     pass

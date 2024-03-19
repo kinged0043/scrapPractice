@@ -1,7 +1,8 @@
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
-
+from scrapy.loader import ItemLoader
+from ..items import HummusItem
 
 class HumspiderSpider(CrawlSpider):
     name = "humspider"
@@ -11,10 +12,15 @@ class HumspiderSpider(CrawlSpider):
     rules = (Rule(LinkExtractor(allow=r"Items/"), callback="parse_item", follow=True),)
 
     def parse_item(self, response):
-        item = {}
-        #item["domain_id"] = response.xpath('//input[@id="sid"]/@value').get()
-        #item["name"] = response.xpath('//div[@id="name"]').get()
-        #item["description"] = response.xpath('//div[@id="description"]').get()
+        name = "  h3 > a.hoverinfo_trigger::text"
+        rank = " h3 > td.rank ac::text"
+        score = " h3 > span.text on score-label score-9::text"
+        description = ""
+        
+        item = ItemLoader(HummusItem())
+        #item["domain_id"] = response.css().get()
+        #item["name"] = response.css().get()
+        #item["description"] = response.css().get()       
         return item
 
 #TODO: find css seelctors for the name, rating/ rank, score  
